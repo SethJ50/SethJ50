@@ -1,16 +1,14 @@
-## Hi there 👋
+Hello, my name is Seth Jernigan. Welcome to my GitHub Profile!
 
-<!--
-**SethJ50/SethJ50** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+### Featured Projects
+- [DataCaddie - Golf Analytics Site](https://github.com/SethJ50/GolfDataSite)
+- []()
+- []()
+- []()
 
-Here are some ideas to get you started:
+### Other Work
+- []()
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### Connect
+- [LinkedIn](https://www.linkedin.com/in/seth-jernigan/)
+

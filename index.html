@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seth Jernigan</title>
+  <meta name="description" content="Seth Jernigan — personal site and featured projects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- Theme ---------- */
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #5f6368;
+      --border: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: #eff4ff;
+      --placeholder: #eef0f3;
+      --radius: 12px;
+      --max-width: 1040px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111214;
+        --surface: #1a1b1e;
+        --text: #ececec;
+        --text-muted: #a0a4ab;
+        --border: #2c2e33;
+        --accent: #6b9bff;
+        --accent-soft: #1e2840;
+        --placeholder: #24262b;
+      }
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 64px 0; }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 24px;
+    }
+
+    h3 { margin: 0; }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-name {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ---------- About ---------- */
+    .about { padding-top: 80px; }
+
+    .about-header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .headshot {
+      flex-shrink: 0;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--placeholder);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .about h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin: 0 0 16px;
+    }
+
+    .bio {
+      max-width: 760px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .bio p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin: 0 0 18px;
+    }
+
+    .bio p:last-child { margin-bottom: 0; }
+
+    .about-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .btn:hover { text-decoration: none; border-color: var(--text-muted); }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { opacity: 0.9; border-color: var(--accent); }
+
+    .btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ---------- Project cards ---------- */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .card-image {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      object-fit: cover;
+      background: var(--placeholder);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 20px;
+    }
+
+    .card-body h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card-body ul {
+      margin: 0 0 16px;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .card-body li + li { margin-top: 4px; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .card-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* ---------- Other work ---------- */
+    .other-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .other-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+    }
+
+    .other-list li + li { border-top: 1px solid var(--border); }
+
+    .other-list span { color: var(--text-muted); font-size: 0.9rem; text-align: right; }
+
+    /* ---------- Contact / footer ---------- */
+    .contact p { color: var(--text-muted); margin: 0 0 20px; max-width: 560px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 700px) {
+      .container { padding: 0 16px; }
+
+      section { padding: 48px 0; }
+
+      .nav-links { gap: 16px; }
+
+      .about { padding-top: 48px; }
+
+      .about-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .headshot { width: 140px; height: 140px; }
+
+      .about h1 { font-size: 2rem; }
+
+      .about-meta { align-items: center; }
+
+      .buttons { justify-content: center; }
+
+      .bio { padding-top: 24px; }
+
+      .bio p { font-size: 1rem; }
+
+      .project-grid { grid-template-columns: 1fr; }
+
+      .other-list li { flex-direction: column; align-items: flex-start; gap: 2px; }
+
+      .other-list span { text-align: left; }
+    }
+
+    @media (max-width: 380px) {
+      .nav-name { display: none; }
+      .nav .container { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== Navigation ========== -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-name">Seth Jernigan</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ========== About ========== -->
+    <section id="about" class="about">
+      <div class="about-header">
+        <img class="headshot" src="images/headshot.jpg" alt="Seth Jernigan">
+
+        <div>
+          <h1>Seth Jernigan</h1>
+          <p class="tagline">Data Science &amp; Software Development</p>
+          <ul class="about-meta">
+            <li>📍 Atlanta, GA</li>
+            <li>🎓 Georgia Institute of Technology - M.S. Analytics '27</li>
+            <li>🎓 University of Arizona - B.S. Statistics and Data Science, B.S. Computer Science</li>
+
+          </ul>
+          <div class="buttons">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/seth-jernigan/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              LinkedIn
+            </a>
+            <a class="btn" href="https://github.com/SethJ50" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
+              GitHub
+            </a>
+            <!-- Optional: resume link
+            <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="bio">
+        <p>
+          I’m an M.S. Analytics student at Georgia Tech with B.S. degrees in Statistics and Data Science as well as Computer Science from the University of Arizona, drawn to work that pairs technical depth (statistical modeling, machine learning) with clear visual communication of its impact. I do my best work on problems that call for both creativity and analytical thinking, and I’m always eager to keep learning.
+        </p>
+        <p>
+          I’m especially interested in applying data science to sports performance, management, and strategy. At Georgia Tech, I’m an analytics intern with the Georgia Tech Athletic Association, work on a defensive evaluation project for Georgia Tech Baseball through the Vertically Integrated Projects program, and serve as video and analytics manager for women’s basketball. On my own time, I work with sports data any chance that I get, from the NFL Big Data Bowl to DataCaddie, my own golf analytics web application. You can find these and some of my other projects below.
+        </p>
+        <p>
+          I’m always glad to talk sports analytics and data, so feel free to reach out on LinkedIn or by email.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== Featured Projects ========== -->
+    <section id="projects">
+      <h2>Featured Projects</h2>
+
+      <div class="project-grid">
+
+        <!-- Project card template: copy one <article> block to add a project.
+             To use a real image, replace the .card-image div with:
+             <img class="card-image" src="images/project.png" alt="Project screenshot"> -->
+
+        <article class="card">
+          <img class="card-image" src="images/datacaddie_courseoverview.png" width="200px">
+          <div class="card-body">
+            <h3>DataCaddie — Golf Analytics Web Application</h3>
+            <ul>
+              <li>Interactive golf analytics platform for the PGA Tour, tailored towards fantasy golf.</li>
+              <li>Python scraping pipeline of 57,000+ PGA Tour strokes-gained rounds, updated weekly since 2022.</li>
+              <li>Comprehensive player profiles, XGBoost and SHAP Course Fit model, user-driven player ranking model, salary-cap lineup optimizer.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">R</span>
+              <span class="tag">Shiny</span>
+              <span class="tag">Python</span>
+              <span class="tag">MongoDB</span>
+            </div>
+            <a class="card-link" href="https://github.com/SethJ50/DataCaddieShiny" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="card-image" src="images/bigdatabowl26_rondalemoore.png" width="200px">
+          <div class="card-body">
+            <h3>NFL Big Data Bowl 2026 — In-Air Receiver Impact on Deep Passes</h3>
+            <ul>
+              <li>Reconstructed post-release motion in 2023 NFL tracking data, engineering separation and pursuit features to train a regularized XGBoost model of per-frame completion probability on deep passes.</li>
+              <li>Designed Net In-Air Completion Probability Change (NCPC) to quantify cumulative receiver impact on deep passes, giving play callers and front offices a new lens to rank 2023 receivers’ in-air playmaking.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Scikit-Learn</span>
+              <span class="tag">XGBoost</span>
+            </div>
+            <a class="card-link" href="https://github.com/SethJ50/NFL-Big-Data-Bowl-2026" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image" role="img" aria-label="Project image placeholder">⚾️</div>
+          <div class="card-body">
+            <h3>Predicting MLB Player Availability</h3>
+            <ul>
+              <li>Modeled MLB player availability (PA/BF) using 2021-2023 pitch-level and biographical data, engineering features like wOBA, FIP, spin rate, and age-based trends.</li>
+              <li>Applied K-Means clustering to segment players by usage level and improved accuracy using tailored MLR, Lasso, and tree-based models for each cluster.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Scikit-Learn</span>
+            </div>
+            <a class="card-link" href="https://github.com/SethJ50/PredictingMLBPlayerAvailability_CSC480" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image" role="img" aria-label="Project image placeholder">⛷️</div>
+          <div class="card-body">
+            <h3>Ski Resort Management System</h3>
+            <ul>
+              <li>Designed and implemented a normalized relational database schema (3NF/BCNF) with an E-R diagram to manage ski resort operations including membership, rentals, lifts, and lessons.</li>
+              <li>Developed a two-tier client-server system using Oracle backend and Java JDBC frontend, supporting full CRUD functionality across multiple entities and enabling direct access to common multi-table queries.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">SQL</span>
+              <span class="tag">Java</span>
+              <span class="tag">Oracle DBMS</span>
+            </div>
+            <a class="card-link" href="https://github.com/penam382/Ski-Resort-Management-System" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="card-image" src="images/cbbarchetypesdash.png" width="200px">
+          <div class="card-body">
+            <h3>College Basketball Matchup Analyzer</h3>
+            <ul>
+              <li>Clustered historical NCAA men's basketball teams into distinct offensive and defensive archetypes based on advanced KenPom metrics.</li>
+              <li>Quantified 'Performance Above Expectation' across historical archetype matchups to extract unexpected matchup trends.</li>
+              <li>Designed interactive dashboard enabling visual comparison of teams' fit into archetypes and identification of style mismatches.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">R</span>
+              <span class="tag">Shiny</span>
+              <span class="tag">K Means Clustering</span>
+            </div>
+            <a class="card-link" href="https://github.com/Dmeisterr/CBB-Project" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== Other Work ========== -->
+    <section id="other">
+      <h2>Other Work</h2>
+      <ul class="other-list">
+        <li>
+          <a href="https://github.com/CSC335/MemoryGame_kylelouissethmustafa" target="_blank" rel="noopener">🃏 JavaFX Memory Game</a>
+          <span>Java · JavaFX</span>
+        </li>
+        <li>
+          <a href="https://github.com/Dmeisterr/474-final-project/tree/main" target="_blank" rel="noopener">🚒 Predicting Wildfire Cause</a>
+          <span>R · XGBoost</span>
+        </li>
+        <li>
+          <a href="https://github.com/Musa1242/337Chat" target="_blank" rel="noopener">💻 337 Chat — Web-Based Social Media Platform</a>
+          <span>HTML · CSS · JavaScript</span>
+        </li>
+        <li>
+          <a href="https://github.com/SethJ50/GolfDataSite" target="_blank" rel="noopener">⛳️ DataCaddie — Original HTML/CSS/JS Version</a>
+          <span>HTML · CSS · JavaScript</span>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Seth Jernigan</div>
+  </footer>
+
+</body>
+</html>
